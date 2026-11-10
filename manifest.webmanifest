@@ -1,0 +1,16 @@
+{
+  "id": "./",
+  "name": "中式九球计分器",
+  "short_name": "九球计分",
+  "description": "适合 iPad 横屏的双人九球计分器",
+  "lang": "zh-CN",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0a0d15",
+  "theme_color": "#0a0d15",
+  "icons": [
+    { "src": "icons/192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
