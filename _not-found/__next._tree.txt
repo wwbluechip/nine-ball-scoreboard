@@ -2,4 +2,4 @@
 :HL["/nine-ball-scoreboard/_next/static/chunks/0mp8b75y3f7q4.css","style"]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"/_not-found","h":96,"c":"$Q2"}]]
-0:{"b":"xApBfrEb9jSCifCzZ-NJ_","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"LxGpLsiYVvYTnbIOqrTt5","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
