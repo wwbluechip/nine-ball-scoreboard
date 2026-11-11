@@ -1,4 +1,5 @@
-:HL["/nine-ball-scoreboard/_next/static/chunks/25kr2mj4jqf63.css","style"]
+:HL["/nine-ball-scoreboard/_next/static/chunks/11zy3bhd6vp_2.css","style"]
+:HL["/nine-ball-scoreboard/_next/static/chunks/0up3d8b36jyou.css","style"]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"/_not-found","h":96,"c":"$Q2"}]]
-0:{"b":"SRbaQPgCLTkhV1xDUGG0m","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"aVSm4C-9ijlPcpfzWTq2P","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
