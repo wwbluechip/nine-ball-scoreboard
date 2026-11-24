@@ -1,29 +1,10 @@
-
-const SCOPE = new URL(self.registration.scope).pathname;
-const PREFIX = "nine-ball@" + SCOPE + ":";
-const CACHE = PREFIX + "nine-ball-d3afb7b79022";
-const ASSETS = ["","_next/static/chunks/08j9dr5stzcah.js","_next/static/chunks/0_jc2i7v2afp-.js","_next/static/chunks/0cz1d0mv5g_q7.js","_next/static/chunks/0mp8b75y3f7q4.css","_next/static/chunks/0wfurka9errm3.js","_next/static/chunks/0z2t49ja8qemn.js","_next/static/chunks/2_7gew0xudsku.js","_next/static/chunks/2a7kw9o5dmhad.js","_next/static/chunks/2md2-3vvfa_lk.css","_next/static/chunks/2u2knofku-6ok.js","_next/static/chunks/39_j1bdzreq0m.js","_next/static/chunks/3qfy96eoyh-ek.js","_next/static/chunks/turbopack-3ostxj0dvpw2u.js","_next/static/io3i1DgI5SRZmpsld8oUi/_buildManifest.js","_next/static/io3i1DgI5SRZmpsld8oUi/_clientMiddlewareManifest.js","_next/static/io3i1DgI5SRZmpsld8oUi/_ssgManifest.js","_next/static/media/barlow_condensed_latin_600_normal-s.p.289y3avl9x-vx.woff2","_next/static/media/barlow_condensed_latin_700_normal-s.p.21s4tc4km7afu.woff2","_next/static/media/barlow_condensed_latin_800_italic-s.p.0uepkfnorwdvm.woff2","_next/static/media/barlow_condensed_latin_800_normal-s.p.3lg-gfem2skt4.woff2","ball.svg","icons/192.png","icons/512.png","manifest.webmanifest","pool-hall.webp","voice/bigGold.m4a","voice/foul.m4a","voice/goldenNine.m4a","voice/knockout.m4a","voice/normalWin.m4a","voice/smallGold.m4a"].map((file) => SCOPE + file);
-const SHELL = new Set(ASSETS);
-
-self.addEventListener("install", (event) => {
-  event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(ASSETS.map((path) => new Request(path, { cache: "reload" })))).then(() => self.skipWaiting()));
-});
+// The app moved to https://nine-ball.heypet.com/. This replaces the old offline worker: it clears the old
+// caches, removes itself, and sends any open copy of the app to the new address.
+self.addEventListener("install", () => self.skipWaiting());
 self.addEventListener("activate", (event) => {
-  event.waitUntil(Promise.all([
-    self.clients.claim(),
-    caches.keys().then((keys) => Promise.all(
-      keys.filter((key) => (key.startsWith(PREFIX) || (SCOPE === "/" && key.startsWith("nine-ball-"))) && key !== CACHE)
-        .map((key) => caches.delete(key)),
-    )),
-  ]));
-});
-self.addEventListener("fetch", (event) => {
-  const { request } = event;
-  const url = new URL(request.url);
-  if (request.method !== "GET" || url.origin !== self.location.origin) return;
-  if (request.mode === "navigate" && (url.pathname === SCOPE || url.pathname === SCOPE + "index.html")) {
-    event.respondWith(fetch(request).catch(() => caches.open(CACHE).then((cache) => cache.match(SCOPE))));
-  } else if (SHELL.has(url.pathname)) {
-    event.respondWith(caches.open(CACHE).then((cache) => cache.match(url.pathname)).then((asset) => asset || fetch(request)));
-  }
+  event.waitUntil((async () => {
+    for (const key of await caches.keys()) await caches.delete(key);
+    await self.registration.unregister();
+    for (const client of await self.clients.matchAll({ type: "window" })) client.navigate("https://nine-ball.heypet.com/");
+  })());
 });
